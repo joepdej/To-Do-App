@@ -1,0 +1,16 @@
+{% extends 'base/main.html' %} {% block content %}
+
+<div class="delete-confirm-container">
+  <form method="post">
+    {% csrf_token %}
+    <p id="confirm-title">Bevestig verwijderen</p>
+    <p id="confirm-text">weet je zeker dat je "{{ object }}" wil verwijderen?</p>
+    {{ form }}
+    <a href="{% url 'todo-list' %}">
+    <input type="button" value="Cancel" id="delete-cancel">
+    </a>
+    <input type="submit" value="Confirm" id="delete-confirm"/>
+  </form>
+</div>
+
+{% endblock content %}

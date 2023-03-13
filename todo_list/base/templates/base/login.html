@@ -1,0 +1,19 @@
+{% extends 'base/main.html' %} {% block content %}
+
+<div id="card">
+  <div id="card-content">
+    <div id="card-title">
+      <h2>Log in</h2>
+      <div class="underline-title"></div>
+    </div>
+    <form method="post" class="form">
+      {% csrf_token %} {{ form.as_p }}
+      <div class="form-border"></div>
+      <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
+      <p>heb je nog geen account? <a href="{% url 'register' %}">Registreer</a></p>
+    </form>
+  </div>
+</div>
+
+
+{% endblock content %}
