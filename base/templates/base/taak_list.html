@@ -31,7 +31,8 @@
             <div class="task-complete-icon"></div>
             <i><s><a href="{% url 'update-taak' taak.id %}">{{taak}}</a></s></i> {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'update-taak' taak.id %}">{{taak}}</a> {% endif %}
+            <a href="{% url 'update-taak' taak.id %}">{{taak}} </a> {% endif %}
+            <span class="date">{{ taak.datumKlaar|date:"d-m-Y" }}</span>
         </div>
         <div class="task-controls">
             <a class="delete-link" href="{% url 'delete-taak' taak.id %}">&#215;</a>

@@ -10,6 +10,8 @@ class Taak(models.Model):
     beschrijving = models.TextField(blank=True)
     compleet = models.BooleanField(default=False)
     datumAangemaakt = models.DateTimeField(auto_now_add=True)
+    datumKlaar = models.DateTimeField(null=True, blank=True)
+
 
     def __str__(self):
         return self.titel

@@ -10,6 +10,7 @@ from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Taak
+from .forms import TaakForm
 
 
 
@@ -78,7 +79,7 @@ class TodoDetail(LoginRequiredMixin, DetailView):
 
 class TodoCreate(LoginRequiredMixin, CreateView):
     model = Taak
-    fields = ['titel', 'beschrijving', 'compleet']
+    form_class = TaakForm
     success_url = reverse_lazy('todo-list')
 
     def form_valid(self, form):
