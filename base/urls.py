@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TodoList, TodoDetail, TodoCreate, TodoUpdate, TodoDelete, TodoLogin, TodoRegister
+from .views import TodoList, TodoDetail, TodoCreate, TodoUpdate, TodoDelete, TodoLogin, TodoRegister, invite_user
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path('maak-taak/', TodoCreate.as_view(), name="maak-taak"),
     path('update-taak/<int:pk>/', TodoUpdate.as_view(), name="update-taak"),
     path('delete-taak/<int:pk>/', TodoDelete.as_view(), name="delete-taak"),
+    path('invite/', invite_user, name='invite_user'),
 
 ]

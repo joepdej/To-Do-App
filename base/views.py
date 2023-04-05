@@ -9,8 +9,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Taak
+from .models import Taak, Invitation
 from .forms import TaakForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import InviteUserForm
+from django.contrib.auth.models import User
 
 
 
@@ -95,6 +99,20 @@ class TodoDelete(LoginRequiredMixin, DeleteView):
     model = Taak
     success_url = reverse_lazy('todo-list')
 
+@login_required
+def invite_user(request):
+    if request.method == 'POST':
+        form = InviteUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            recipient = User.objects.get(username=username)
+            task_list = TaskList.objects.first()  # Replace this with the TaskList you want to invite the user to
+            invitation = Invitation(sender=request.user, recipient=recipient, task_list=task_list)
+            invitation.save()
+            return redirect('tasks')  # Replace 'tasks' with the name of the view where you want to redirect after a successful invitation
+    else:
+        form = InviteUserForm()
+    return render(request, 'invite_user.html', {'form': form})
 
 
 

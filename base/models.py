@@ -18,3 +18,14 @@ class Taak(models.Model):
 
     class Meta:
         ordering = ["compleet"]
+
+
+
+class Invitation(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_invitations', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, related_name='received_invitations', on_delete=models.CASCADE)
+    task_list = models.ForeignKey(Taak, on_delete=models.CASCADE)
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.sender.username} invited {self.recipient.username} to {self.task_list.titel}"
